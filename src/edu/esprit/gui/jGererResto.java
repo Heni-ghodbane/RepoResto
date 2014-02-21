@@ -307,12 +307,37 @@ public class jGererResto extends javax.swing.JFrame {
         }
         else
         {
+             
+            int n = JOptionPane.showConfirmDialog(rootPane, "Etes vous sure de vouloir supprimer le restaurant " + JTableResto.getValueAt(JTableResto.getSelectedRow(), 1 ) + "?", "",  JOptionPane.YES_NO_CANCEL_OPTION);
+           
+//the user has clicked the cross
+if(n == -1)
+{
+   return;
+}
+           
+//the user has clicked cancel
+if(n == 2)
+{
+   return;
+}
+ 
+//yes
+if(n == 0){
+        
+               
             int id = Integer.parseInt( GR.getValueAt(x , 0).toString());
             System.out.println(id);
             new RestaurantDAO().deleteRestaurant(id);
             GR.listRestaurant = new RestaurantDAO().DisplayAllRestaurant();
             JTableResto.setModel(GR);
             JOptionPane.showMessageDialog( this, "Suppression effectuée avec succés !");
+}   
+//no
+if(n == 1){
+    return;
+}
+            
 
         }
 
@@ -359,6 +384,24 @@ public class jGererResto extends javax.swing.JFrame {
         else
         {
         
+                        int n = JOptionPane.showConfirmDialog(rootPane, "Etes vous sure de vouloir modifier le restaurant  " + JTableResto.getValueAt(JTableResto.getSelectedRow(), 1 ) + "?", "",  JOptionPane.YES_NO_CANCEL_OPTION);
+           
+//the user has clicked the cross
+if(n == -1)
+{
+   return;
+}
+           
+//the user has clicked cancel
+if(n == 2)
+{
+   return;
+}
+ 
+//yes
+if(n == 0){
+        
+               
         restaurant rest = new restaurant();
         rest.setId(Integer.parseInt(tf_id.getText()));
         rest.setAdresse(tf_adresse.getText());
@@ -372,6 +415,13 @@ public class jGererResto extends javax.swing.JFrame {
         new  RestaurantDAO().updateRestaurant(rest);
         JTableResto.setModel(new GererRestaurant());
         JOptionPane.showMessageDialog( this, "Modification appliquée avec succès !");
+}   
+//no
+if(n == 1){
+    return;
+}
+            
+
         }
 
     }//GEN-LAST:event_bt_modifierActionPerformed
